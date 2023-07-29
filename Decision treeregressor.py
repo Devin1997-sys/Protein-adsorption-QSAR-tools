@@ -10,7 +10,7 @@ import math
 from sklearn.tree import DecisionTreeRegressor
 
 ##数据导入
-data1=pd.read_csv('打乱后特征 - 副本.csv')
+data1=pd.read_csv('data1.csv')
 X=data1.iloc[:,0:-2]
 y=data1.iloc[:,-1:]
 print(data1,data1.shape)
@@ -24,7 +24,7 @@ estimator = RandomForestRegressor(n_estimators=1000,criterion='mse',
                               random_state=19,n_jobs=1)
 selector = RFE(estimator,step=0.1,n_features_to_select=20)
 selector.fit(X,y.values.ravel())
-print("排名：",selector.ranking_)
+print("rank：",selector.ranking_)
 data = selector.ranking_
 X1=pd.DataFrame()
 
@@ -110,12 +110,12 @@ plt.scatter(pred_yTrain,y_train_train,
              s=100,
              alpha=0.9,
              label='Training Data')
-# plt.scatter(pred_yvalidation,y_validation,
-#             c='orange',
-#             edgecolor='orange',
-#             marker='^',s=50,
-#             alpha=0.9,
-#             label='Validation Data')
+plt.scatter(pred_yvalidation,y_validation,
+            c='orange',
+            edgecolor='orange',
+            marker='^',s=50,
+            alpha=0.9,
+            label='Validation Data')
 plt.scatter(pred_test,y_test,c='orange',
              edgecolor='orange',
              marker='^',
