@@ -11,13 +11,13 @@ from sklearn.feature_selection import VarianceThreshold
 import math
 from sklearn.multioutput import MultiOutputRegressor
 
-##数据导入
-data1=pd.read_csv('打乱后特征 - 副本.csv')
+## Data import
+data1=pd.read_csv('Data.csv')
 X=data1.iloc[:,0:-2]
 y=data1.iloc[:,-1:]
 print(data1,data1.shape)
 
-##特征选择
+## Feature selection
 sel = VarianceThreshold(threshold=0.09)
 X=sel.fit_transform(X)
 print(X)
@@ -40,14 +40,14 @@ for index,i in enumerate(data):
             X1= X1.join(X2)
 print(X1)
 
-##关键特征处理
+## Key feature selection
 outputpath='C:\\Users\yons\model\qsar supplement/hhh.csv'
 X1.to_csv(outputpath,sep=',',index=False,header=True)
 data2=pd.read_csv('hhh.csv')
 X3=data2.iloc[:,1:]
 X3=np.array(X3)
 
-#训练集和测试集划分
+## Train set and test set partition
 from sklearn.model_selection import train_test_split
 X_train,X_test,y_train,y_test=train_test_split(X3,y,
                                                  test_size=0.1,
@@ -60,7 +60,7 @@ score1=r2_score(y_test,pred_test)
 score3=mean_squared_error(y_test,pred_test)
 score3 =math.sqrt(score3)
 
-##交叉验证
+## Cross verification
 kf = KFold(n_splits=10,shuffle=True,random_state=19)
 for train_index, validation_index in kf.split(X_train):
     print("Train:", train_index, "Validation:",validation_index)
@@ -96,11 +96,11 @@ for train_index,validation_index in kf.split(X_train, y_train):
     print('average rmse train',m/i)
     i += 1
 
-#模型评价指标
+## Model evalution index
 print('r2 test', score1)
 print('rmse test',score3)
 
-#数据可视化
+## Data visualization
 plt.scatter(pred_yTrain,y_train_train,
              c='gray',
              edgecolor='gray',
