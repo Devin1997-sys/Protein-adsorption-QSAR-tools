@@ -10,13 +10,13 @@ from sklearn.metrics import r2_score
 from sklearn.feature_selection import VarianceThreshold
 import math
 
-##数据导入
-data1=pd.read_csv('打乱后特征.csv')
+## Data import
+data1=pd.read_csv('data.csv')
 X=data1.iloc[:,2:-3]
 y=data1.iloc[:,-1:]
 print(X)
 
-##特征选择
+## Feature selection
 sel = VarianceThreshold(threshold=0.09)
 X=sel.fit_transform(X)
 print(X)
@@ -42,7 +42,7 @@ for index,i in enumerate(data):
             X1= X1.join(X2)
 print(X1)
 
-##关键特征处理
+## Key feature processing
 outputpath='C:\\Users\yons\model\qsar supplement/data4-2-RFdescriptors.csv'
 X1.to_csv(outputpath,sep=',',index=False,header=True)
 data2=pd.read_csv('data4-2-RFdescriptors.csv')
@@ -50,7 +50,7 @@ X3=data2.iloc[:,0:]
 X3=np.array(X3)
 print(X3.shape[1])
 
-##训练集和测试集划分
+## Train set and test set partition
 from sklearn.model_selection import train_test_split
 for random_state_1 in range(1,11):
     X_train,X_test,y_train,y_test=train_test_split(X3,y,
@@ -68,7 +68,7 @@ for random_state_1 in range(1,11):
     print('r2 test', score1)
     print('rmse test',score3)
 
-##交叉验证
+## Cross verification
 kf = KFold(n_splits=10,shuffle=True,random_state=1)
 for train_index, validation_index in kf.split(X_train):
     print("Train:", train_index, "Validation:",validation_index)
@@ -105,11 +105,11 @@ for train_index,validation_index in kf.split(X_train, y_train):
     print('average rmse train',m/i)
     i += 1
 
-#模型评价指标
+## Model evalution index
 print('r2 test', score1)
 print('rmse test',score3)
 
-#数据可视化
+## Data visualization
 fig,axes = plt.subplots(figsize=(6,5))
 x1_label = axes.get_xticklabels()
 [x1_label_temp.set_fontname('Times New Roman') for x1_label_temp in x1_label]
