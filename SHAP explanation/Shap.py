@@ -4,8 +4,8 @@ from sklearn.ensemble import RandomForestRegressor
 import matplotlib.pyplot as plt
 from sklearn.ensemble import GradientBoostingRegressor
 data1=pd.read_csv('Gra_feature.csv')
-data2=pd.read_csv('第三类.csv')
-data3=pd.read_csv('打乱后特征.csv')
+data2=pd.read_csv('data0.csv')
+data3=pd.read_csv('data1.csv')
 X1=data1.iloc[:,1:]
 X2=data2.iloc[:,1:]
 y=data3.iloc[:,-2]
