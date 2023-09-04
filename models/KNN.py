@@ -11,7 +11,7 @@ from sklearn import neighbors
 import math
 
 ## Data import
-data1=pd.read_csv('打乱后特征 - 副本.csv')
+data1=pd.read_csv('data.csv')
 X=data1.iloc[:,0:-1]
 y=data1.iloc[:,-1:]
 print(data1,data1.shape)
