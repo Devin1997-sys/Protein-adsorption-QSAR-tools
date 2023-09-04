@@ -27,7 +27,7 @@ estimator2 = RandomForestRegressor(n_estimators=515,criterion='mse',max_depth=17
                               random_state=19,n_jobs=1,min_samples_leaf=1)
 selector = RFE(estimator2,step=0.1,n_features_to_select=25)
 selector.fit(X,y.values.ravel())
-print("rank：",selector.ranking_)
+print("Rank：",selector.ranking_)
 data = selector.ranking_
 X1=pd.DataFrame()
 if X1.empty == True:
